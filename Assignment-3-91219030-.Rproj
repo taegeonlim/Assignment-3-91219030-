@@ -1,13 +1,106 @@
-Version: 1.0
+Company_ID_number<-c(1:110)
+Company_ID_number
 
-RestoreWorkspace: Default
-SaveWorkspace: Default
-AlwaysSaveHistory: Default
+Product_ID_number<-paste(sample(letters, 17),sample(1:1000, 110), sep='')
+Product_ID_number<-toupper(Product_ID_number)
 
-EnableCodeIndexing: Yes
-UseSpacesForTab: Yes
-NumSpacesForTab: 2
-Encoding: UTF-8
+Customer_Demand<-sample(100:1000, 110)
+Customer_Demand
 
-RnwWeave: Sweave
-LaTeX: pdfLaTeX
+Sale_Won<-sample(10:200, 110)
+Sale_Won <- Sale_Won * 1000
+Sale_Won
+df<-data.frame(Company_ID_number, Product_ID_number, Customer_Demand, Sale_Won)
+df
+lapply(df,mean)
+
+######################################################################################
+
+Avg_Customer_Demand<-mean(df$Customer_Demand)
+Avg_Customer_Demand
+
+Company_ID_number1<-NULL
+Product_ID_number1<-NULL
+Customer_Demand1<-NULL
+Sale_Won1<-NULL
+
+Company_ID_number1<-(1:110)
+Product_ID_number1<-(1:110)
+Customer_Demand1<-(1:110)
+Sale_Won1<-(1:110)
+
+for(i in 1:110){
+  Company_ID_number1[i]<-NA
+  Product_ID_number1[i]<-NA
+  Customer_Demand1[i]<-NA
+  Sale_Won1[i]<-NA
+}
+
+cnt = 0
+for(i in 1:110){
+  if(df$Customer_Demand[i] > Avg_Customer_Demand){
+    Company_ID_number1[i] <- df$Company_ID_number[i]
+    Product_ID_number1[i] <- df$Product_ID_number[i]
+    Customer_Demand1[i] <- df$Customer_Demand[i]
+    Sale_Won1[i] <- df$Sale_Won[i]
+    cnt = cnt +1
+  }
+  else {
+    cnt = cnt +1
+  }
+}
+df1<-data.frame(Company_ID_number1, Product_ID_number1, Customer_Demand1, Sale_Won1)
+
+
+colnames(df1) <- c("Company_ID_number", "Product_ID_number", "Customer_Demand","Sale_Won")
+df1
+df1<-na.omit(df1)
+print(df1)
+
+
+##############################################################################################
+
+
+Avg_Sale_Won<-mean(df$Sale_Won)
+Avg_Sale_Won
+df
+Company_ID_number2<-NULL
+Product_ID_number2<-NULL
+Customer_Demand2<-NULL
+Sale_Won2<-NULL
+
+Company_ID_number2<-(1:110)
+Product_ID_number2<-(1:110)
+Customer_Demand2<-(1:110)
+Sale_Won2<-(1:110)
+
+for(i in 1:110){
+  Company_ID_number2[i]<-NA
+  Product_ID_number2[i]<-NA
+  Customer_Demand2[i]<-NA
+  Sale_Won2[i]<-NA
+}
+
+for(i in 1:110){
+  if(df$Sale_Won[i] > Avg_Sale_Won){
+    Company_ID_number2[i] <- df$Company_ID_number[i]
+    Product_ID_number2[i] <- df$Product_ID_number[i]
+    Customer_Demand2[i] <- df$Customer_Demand[i]
+    Sale_Won2[i] <- df$Sale_Won[i]
+    cnt = cnt +1
+  }
+  else {
+    cnt = cnt+1
+  }
+}
+cnt
+
+
+df2<-data.frame(Company_ID_number2, Product_ID_number2, Customer_Demand2, Sale_Won2)
+df2
+
+colnames(df2) <- c("Company_ID_number", "Product_ID_number", "Customer_Demand","Sale_Won")
+df2
+df2<-na.omit(df2)
+print(df2)
+
